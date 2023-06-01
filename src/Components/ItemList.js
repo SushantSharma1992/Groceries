@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import Item from "./Item";
 import { ItemContext } from "../Context/ItemsProvider";
-import Total from "./Total";
-import AddItemForm from "./AddItemForm";
 import AddGroceriesButton from "./AddGroceriesButton";
+import AddItemForm from "./AddItemForm";
+import Total from "./Total";
+import CartItem from "../Unit/CartItem";
 
 export default function ItemList() {
   const [show, setShow] = useState(false);
@@ -21,7 +21,7 @@ export default function ItemList() {
       {items.map((value) => {
         return (
           <div key={value.id}>
-            <Item item={value} editFunc={editItemFunc}/>
+            <CartItem item={value} editFunc={editItemFunc}/>
           </div>
         );
       })}

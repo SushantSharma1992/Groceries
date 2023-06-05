@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { ItemContext } from "../Context/ItemsProvider";
+import { getPrice } from "../Utils/ItemUtils";
 
 export default function Total(props) {
   const { items } = useContext(ItemContext);
@@ -8,7 +9,7 @@ export default function Total(props) {
   useEffect(() => {
     let newTotal = 0;
     items.forEach((item) => {
-      newTotal += (item.quantity * item.price);
+      newTotal += (item.purchaseQuantity * getPrice(item,item.purchaseQuantity));
     });
     setTotal(newTotal);
   }, [items]);

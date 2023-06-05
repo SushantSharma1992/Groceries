@@ -1,11 +1,6 @@
 import React from "react";
-import ItemList from "../Components/ItemList";
-import ItemsProvider from "../Context/ItemsProvider";
+import CartList from "../Components/CartList";
 
 export default function Cart() {
-  return (
-    <ItemsProvider>
-      <ItemList />
-    </ItemsProvider>
-  );
+  return <CartList />;
 }

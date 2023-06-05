@@ -5,14 +5,14 @@ import ItemDetail from "../Components/ItemDetail";
 import ItemQuantityChanger from "../Components/ItemQuantityChanger";
 
 export default function CartItem(props) {
-  const [quantity, setQuantity] = useState(props.item.quantity);
+  const [quantity, setQuantity] = useState(1);
   const { items, setItems } = useContext(ItemContext);
   const index = items.findIndex((item) => item.id === props.item.id);
 
   useEffect(() => {
     const newItems = Array.of(...items);
     if (index >= 0) {
-      newItems[index] = { ...props.item, quantity };
+      newItems[index] = { ...props.item, purchaseQuantity: quantity };
       setItems(newItems);
     }
 

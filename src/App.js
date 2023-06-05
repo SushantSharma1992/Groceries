@@ -1,19 +1,14 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Cart from "./Pages/Cart";
 import React from "react";
-import AllItems from "./Pages/AllItems";
+import AppRoutes from "./Routes/AppRoutes";
+import ItemsProvider from "./Context/ItemsProvider";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          {/* <Route path="/" element={<AllItems />} /> */}
-          <Route path="/" element={<Cart />} />
-          <Route path="/all-items" element={<AllItems />} />
-        </Routes>
-      </BrowserRouter>
+      <ItemsProvider>
+        <AppRoutes />
+      </ItemsProvider>
     </div>
   );
 }

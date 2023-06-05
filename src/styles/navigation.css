@@ -1,0 +1,41 @@
+.navigationPanel {
+    position: -webkit-fixed; /* Safari */
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #fff;
+
+}
+
+.navMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navItem {
+    flex-grow: 1;
+    padding: 1rem;
+    background-color: var(--secondary-color-light);
+    margin: 2px;
+    border: 2px solid var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.navItem :hover {
+    background-color: var(--secondary-color);
+}
+
+.navItem :active {
+    background-color: var(--secondary-color);
+}
+
+.searchComp {
+    border-radius: 1rem;
+    border: 1px solid var(--primary-color);
+    width: 50dvw;
+    height: 2rem;
+    padding: 4px;
+    margin: 4px;
+}

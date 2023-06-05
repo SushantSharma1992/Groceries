@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import { ItemContext } from "../Context/ItemsProvider";
 import AddGroceriesButton from "./AddGroceriesButton";
-import AddItemForm from "./AddItemForm";
+import AddItemForm from "./Addform/AddItemForm";
 import Total from "./Total";
 import CartItem from "../Unit/CartItem";
+import { initObject } from "../Utils/Constants";
 
-export default function ItemList() {
+export default function CartList() {
   const [show, setShow] = useState(false);
-  const [editItem, setEditItem] = useState({name:"",price:''})
+  const [editItem, setEditItem] = useState(initObject)
   const { items } = useContext(ItemContext);
 
   const editItemFunc = (item) => { 

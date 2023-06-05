@@ -1,11 +1,16 @@
 html {
   background-color: #000;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 .App {
@@ -16,6 +21,13 @@ html {
   --secondary-color-light: #E7AB9A;
   --secondary-color: #DF7857;
   --add-z-index: 1000;
+}
+
+.full_page_center {
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
@@ -129,9 +141,10 @@ button {
 
 }
 
-.subtract{
+.subtract {
   background-color: var(--secondary-color-light);
 }
+
 .subtract:hover {
   background-color: var(--secondary-color-light);
 }
@@ -232,4 +245,14 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+select {
+  border-radius: .5em;
+  size: 1em;
+  height: 35px;
+  font-size: 22px;
+  border: none;
+  padding: 4px;
+  border: none;
 }

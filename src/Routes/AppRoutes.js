@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Products from "../Pages/Products";
 import Cart from "../Pages/Cart";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
+import Products from "../Pages/Products";
+import Settings from "../Pages/Settings";
 import { routerPath } from "./Urls";
 
 export default function AppRoutes() {
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         {/* <Route path={routerPath.home} element={<Home />} /> */}
         <Route path={routerPath.products} element={<Products />} />
         <Route path={routerPath.cart} element={<Cart />} />
+        <Route path={routerPath.settings} element={<Settings />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Home/>

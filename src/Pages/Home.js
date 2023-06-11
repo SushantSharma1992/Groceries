@@ -15,6 +15,9 @@ export default function Home() {
           <Link className="navItem" to={routerPath.products}>
             Products
           </Link>
+          <Link className="navItem" to={routerPath.settings}>
+            Settings
+          </Link>
         </div>
       </div>
   );

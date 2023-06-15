@@ -40,7 +40,7 @@ export default function SlideForOption({ children }) {
 
   return (
     <div
-      className="item center"
+      className="item center_grid"
       ref={currentItemRef}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}

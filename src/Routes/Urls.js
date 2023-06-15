@@ -4,5 +4,7 @@ export const routerPath = {
   settings: "/settings",
   options: "/options",
   products: "/",
+  barcode: "barcode",
+  add: "add",
   //products: "/products",
 };

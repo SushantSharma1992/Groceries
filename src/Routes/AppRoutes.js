@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AddItemFormPage from "../Components/Addform/AddItemFormPage";
 import Cart from "../Pages/Cart";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
@@ -16,6 +17,7 @@ export default function AppRoutes() {
         <Route path={routerPath.products} element={<Products />} />
         <Route path={routerPath.cart} element={<Cart />} />
         <Route path={routerPath.settings} element={<Settings />} />
+        <Route path={routerPath.add} element={<AddItemFormPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Home/>

@@ -1,12 +1,8 @@
 import { metricChart } from "./Constants";
 
-export const getValue = (item) => {
-  const array = item.rates;
-  let unit = 1;
-  if (item.unit === "Kg") {
-    unit = metricChart.get(item.unit);
-  }
-  return (item.weight * unit) / array[0].price;
+export const getMiliUnit = (item) => {
+  let unit = metricChart.get(item.unit);
+  return item.weight * unit;
 };
 
 export const getPrice = (item) => {

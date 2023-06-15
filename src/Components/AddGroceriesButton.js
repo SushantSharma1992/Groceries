@@ -4,10 +4,9 @@ export default function AddGroceriesButton(props) {
   return (
     <button
       type="button"
-      className="addGroceries"
+      className="addGroceries_button"
       onClick={() => {
         props.showForm(!props.show);
-        props.setEditItem({name:'',price:""})
       }}
     >
       <div>+</div>

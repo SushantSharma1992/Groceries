@@ -1,27 +1,67 @@
 html {
-  background-color: #000;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
+  color-scheme: light dark;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+
+}
+
+body {
+  font-family: system-ui;
 }
 
 .App {
+  height: 100dvh;
+  margin-inline: auto;
   text-align: center;
-  background-color: #ACB1D6;
-  --primary-color-light: #57C5B6;
-  --primary-color: #159895;
-  --secondary-color-light: #E7AB9A;
-  --secondary-color: #DF7857;
+  color: black;
+  --primary-color-light: #8696FE;
+  --primary-color: #4942E4;
+  --secondary-color-light: #FFF5B8;
+  --secondary-color: #FFE7A0;
   --add-z-index: 1000;
+  --button-radius: 4rem;
+}
+
+.fullpage {
+  height: 100dvh;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direction_column {
+  display: flex;
+  flex-direction: column;
+}
+
+.space_between {
+  justify-content: space-between;
 }
 
 button {
   background-color: var(--primary-color-light);
   flex: 1;
+  color: #000 !important;
+}
 
+.primary {
+  background-color: var(--primary-color-light);
+}
+
+.secondary {
+  background-color: var(--secondary-color-light);
 }
 
 .App-logo {
@@ -71,6 +111,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   overflow: hidden;
+  color: #57C5B6;
 }
 
 .leftButton {
@@ -83,7 +124,7 @@ button {
   color: white
 }
 
-.center {
+.center_grid {
   transition: transform 200ms;
   height: 100%;
   width: 100%;
@@ -110,13 +151,24 @@ button {
   padding: 1em;
   flex: 2;
   cursor: pointer;
+  /* transition: background-color 1s linear */
 }
+
+.item-left:active {
+  background-color: var(--primary-color-light);
+}
+
+.item-left:focus {
+  background-color: var(--primary-color-light);
+}
+
 
 .item-right {
   flex: 1;
   display: flex;
   overflow: hidden;
   cursor: pointer;
+  height: 100%;
 }
 
 .product {
@@ -125,19 +177,24 @@ button {
 }
 
 .price {
-  font-size: xx-large;
+  font-size: 1.5rem;
 
 }
 
-.subtract{
+.subtract {
   background-color: var(--secondary-color-light);
 }
+
 .subtract:hover {
   background-color: var(--secondary-color-light);
 }
 
 .subtract:active {
   background-color: var(--secondary-color);
+}
+
+.add {
+  background-color: var(--primary-color-light);
 }
 
 .add:hover {
@@ -157,31 +214,33 @@ button {
   overflow: hidden;
 }
 
-.addGroceries {
-  position: absolute;
-  height: 2em;
-  width: 2em;
-  bottom: 1em;
-  right: 1em;
+.addGroceries_button {
+  position: fixed;
+  height: var(--button-radius);
+  width: var(--button-radius);
+  bottom: 4rem;
+  right: 1rem;
   font-size: 40px;
   border-radius: 50%;
   background-color: #57C5B6;
   text-align: center;
-  color: white;
   border: none;
   z-index: var(--add-z-index);
 }
 
-.addGroceries:active {
+.addGroceries_button:active {
   background-color: var(--primary-color);
 }
 
+.list_container {
+  padding: 0 .5rem 8rem .5rem;
+}
 
 .add__item_container {
   position: absolute;
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 100dvh;
+  width: calc(100% - 8px);
   align-items: center;
   justify-content: center;
   background-color: black;
@@ -195,13 +254,14 @@ button {
   border-radius: 1em;
   text-align: start;
   color: #E4DCCF;
+  width: 80dvw;
 }
 
 .form_items {
   display: flex;
   flex-direction: column;
   color: white;
-  padding: 2em;
+  padding: .5rem;
   background-color: var(--primary-color);
   border-radius: 1em;
 }
@@ -215,14 +275,35 @@ button {
   border-radius: 2em;
 }
 
-.saveButton {
+.form_input {
+  flex: 1
+}
+
+.button_margin_top {
   margin-top: 1em;
+}
+
+.padding-m {
+  padding: 8px;
+}
+
+.padding-x {
+  padding: 16px;
+}
+
+.padding-xl {
+  padding: 32px;
+}
+
+.padding-xxl {
+  padding: 64px;
 }
 
 input {
   border-radius: .5em;
   size: 1em;
   height: 28px;
+  min-width: 0;
   font-size: 22px;
   border: none;
   padding: 4px;
@@ -232,4 +313,127 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+.resetDefaultWidth {
+  min-width: 0;
+}
+
+select {
+  border-radius: .5em;
+  size: 1em;
+  height: 35px;
+  font-size: 22px;
+  border: none;
+  padding: 4px;
+  border: none;
+}
+
+.options_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: var(--primary-color-light);
+  color: #000;
+
+}
+
+.option_row {
+  background-color: transparent;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.option_description {
+  font-size: 24px;
+  text-align: center;
+  padding-right: 1rem;
+}
+
+.flash_image_container {
+  background-color: lightgrey;
+  border-radius: 50%;
+}
+
+.option_image_container {}
+
+.option_image {
+  height: 40px;
+  width: 40px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.camera_container {
+  color: red;
+}
+
+.videoFrame {
+  width: 100%;
+}
+
+
+.search_container {
+  position: fixed;
+  bottom: 4rem;
+  z-index: 3;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--primary-color-light);
+}
+
+.inner_search_container {
+  flex-direction: column;
+}
+
+.search_bar_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5rem;
+  border-radius: 1rem;
+  background-color: var(--primary-color-light);
+}
+
+.searchComp {
+  border-radius: 1rem;
+  border: 1px solid var(--primary-color);
+  height: 2rem;
+  padding: 4px;
+  margin: 4px;
+  width: 50dvw;
+}
+
+.search_result_item {
+  font-size: larger;
+  background-color: var(--primary-color-light);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.productItem:focus {
+  color: #61dafb;
+}
+
+.closeButton {
+  position: fixed;
+  top: 0;
+  right: 0;
+  color: white;
+  padding: 1.5rem;
+  font-size: 1rem;
+
 }

@@ -1,10 +1,13 @@
 .navigationPanel {
-    position: -webkit-fixed; /* Safari */
+    position: -webkit-fixed;
+    /* Safari */
     position: fixed;
     bottom: 0px;
     width: 100%;
-    background-color: #fff;
-
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navMenu {
@@ -12,30 +15,43 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: 0 .5rem 0 .5rem;
+
+}
+
+.disable-select {
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .navItem {
+    all: unset;
     flex-grow: 1;
-    padding: 1rem;
+    padding: .5rem;
     background-color: var(--secondary-color-light);
-    margin: 2px;
-    border: 2px solid var(--primary-color);
-    font-size: 1.2rem;
-}
-
-.navItem :hover {
-    background-color: var(--secondary-color);
-}
-
-.navItem :active {
-    background-color: var(--secondary-color);
-}
-
-.searchComp {
-    border-radius: 1rem;
+    margin: 1px;
     border: 1px solid var(--primary-color);
-    width: 50dvw;
-    height: 2rem;
-    padding: 4px;
-    margin: 4px;
+    font-size: .5rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.navItem:active {
+    background-color: var(--secondary-color);
+}
+
+.navImage {
+    height: 15px;
+    width: 15px;
+}
+
+.barcode_image {
+    height: 35px;
+    width: 35px;
 }

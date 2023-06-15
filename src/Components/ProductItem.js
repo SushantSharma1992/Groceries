@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import ItemDetail from "./ItemDetail";
-import ValuePerRs from "./ValuePerRs";
-import Item from "./Item";
 import { ItemContext } from "../Context/ItemsProvider";
+import Item from "./Item";
+import ItemDetail from "./ItemDetail";
 
 export default function ProductItem(props) {
   const { items, setItems } = useContext(ItemContext);
@@ -20,11 +19,8 @@ export default function ProductItem(props) {
   };
 
   return (
-    <div>
-      <Item editItem={editItem} deleteItem={deleteItem}>
-        <ItemDetail item={item} />
-        <ValuePerRs item={item} />
-      </Item>
-    </div>
+    <Item editItem={editItem} deleteItem={deleteItem}>
+      <ItemDetail item={item} />
+    </Item>
   );
 }

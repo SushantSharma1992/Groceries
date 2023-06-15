@@ -37,7 +37,6 @@ export default function Options() {
       // Don't trust the fileContents!
       // Test any assumptions about its contents!
       const fileContents = e.target.result;
-      console.log(fileContents);
       setItems(mergeProductList(items, JSON.parse(fileContents)));
     };
 
@@ -82,6 +81,14 @@ export default function Options() {
         />
       ),
       onClick: upload,
+    },
+    {
+      description: "Delete Data",
+      image: <JsonLogo className="option_image" />,
+      hiddenElement: <></>,
+      onClick: () => {
+        setItems([])
+      },
     },
   ];
 

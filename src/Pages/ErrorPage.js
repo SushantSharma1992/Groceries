@@ -7,7 +7,7 @@ export default function ErrorPage() {
     document.location.href="/";
   };
   return (
-    <div className="full_page_center">
+    <div className="fullpage center">
       <div>
         <button type="button" onClick={clearCache}>
           Clear cache and Reload

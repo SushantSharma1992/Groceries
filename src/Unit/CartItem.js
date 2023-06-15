@@ -6,14 +6,14 @@ import ItemQuantityChanger from "../Components/ItemQuantityChanger";
 
 export default function CartItem(props) {
   const [quantity, setQuantity] = useState(1);
-  const { items, setItems } = useContext(ItemContext);
-  const index = items.findIndex((item) => item.id === props.item.id);
+  const { cartList, setCartList } = useContext(ItemContext);
+  const index = cartList.findIndex((item) => item.id === props.item.id);
 
   useEffect(() => {
-    const newItems = Array.of(...items);
+    const newItems = Array.of(...cartList);
     if (index >= 0) {
       newItems[index] = { ...props.item, purchaseQuantity: quantity };
-      setItems(newItems);
+      setCartList(newItems);
     }
 
     // eslint-disable-next-line
@@ -29,10 +29,10 @@ export default function CartItem(props) {
   };
 
   const deleteItem = () => {
-    const newArray = Array.of(...items).filter(
+    const newArray = Array.of(...cartList).filter(
       (item) => item.id !== props.item.id
     );
-    setItems(newArray);
+    setCartList(newArray);
   };
 
   const editItem = () => {

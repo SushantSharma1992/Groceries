@@ -15,7 +15,6 @@ const Menu = () => {
   );
   const toggle = () => {
     setOpenMenu((prev) => {
-      console.log("toggleing");
       rightPanel.current.focus();
       return !prev;
     });

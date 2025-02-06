@@ -15,6 +15,7 @@ const Menu = () => {
   );
   const toggle = () => {
     setOpenMenu((prev) => {
+      console.log("toggleing");
       rightPanel.current.focus();
       return !prev;
     });
@@ -34,10 +35,11 @@ const Menu = () => {
         tabIndex={0}
         className="right_panel"
         style={{ width: `${openMenu ? "255px" : "0"}` }}
-        onBlur={close}
         onKeyDown={(e) => {
           e.key === "Escape" && close();
         }}
+        onMouseLeave={close}
+        onTouchEnd={close}
       >
         <div className="menubutton" onClick={close}>
           <RxCross1 />

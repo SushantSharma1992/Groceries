@@ -18,7 +18,7 @@ export default function ProductList() {
 
   return (
     <div className="list_container">
-      {show && <AddItemFormPage item={editItem} setShow={setShow} />}
+      {show && <AddItemFormPage product={editItem} setShow={setShow} />}
       {items.map((value) => {
         return (
           <div key={value.id}>
@@ -26,7 +26,7 @@ export default function ProductList() {
           </div>
         );
       })}
-      <AddGroceriesButton show={show} showForm={setShow} />
+      <AddGroceriesButton show={show} showForm={setShow} setEditItem={setEditItem} />
       <ProductSearch />
     </div>
   );

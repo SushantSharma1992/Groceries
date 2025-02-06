@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ItemContext } from "../Context/ItemsProvider";
 import Item from "../Components/Item";
-import ItemDetail from "../Components/ItemDetail";
 import ItemQuantityChanger from "../Components/ItemQuantityChanger";
+import { ItemContext } from "../Context/ItemsProvider";
+import ItemPresentation from "./ItemPresentation";
 
 export default function CartItem(props) {
   const [quantity, setQuantity] = useState(1);
@@ -42,8 +42,9 @@ export default function CartItem(props) {
   const { item } = props;
   return (
     <Item editItem={editItem} deleteItem={deleteItem}>
-      <ItemDetail item={item} quantity={quantity} />
+      <ItemPresentation item={item} quantity={quantity}>
       <ItemQuantityChanger decrement={decrement} increment={increment} />
+      </ItemPresentation>
     </Item>
   );
 }

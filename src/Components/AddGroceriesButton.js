@@ -1,4 +1,5 @@
 import React from "react";
+import { initObject } from "../Utils/Constants";
 
 export default function AddGroceriesButton(props) {
   return (
@@ -7,6 +8,7 @@ export default function AddGroceriesButton(props) {
       className="addGroceries_button"
       onClick={() => {
         props.showForm(!props.show);
+        props.setEditItem(initObject)
       }}
     >
       <div>+</div>

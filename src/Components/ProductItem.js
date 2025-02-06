@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ItemContext } from "../Context/ItemsProvider";
+import ItemPresentation from "../Unit/ItemPresentation";
 import Item from "./Item";
-import ItemDetail from "./ItemDetail";
 
 export default function ProductItem(props) {
   const { items, setItems } = useContext(ItemContext);
@@ -20,7 +20,8 @@ export default function ProductItem(props) {
 
   return (
     <Item editItem={editItem} deleteItem={deleteItem}>
-      <ItemDetail item={item} />
+      <ItemPresentation item={item}>
+      </ItemPresentation>
     </Item>
   );
 }

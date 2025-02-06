@@ -24,7 +24,7 @@ export default function Search({ list, actionOnResult }) {
         <input
           className="searchComp"
           type="search"
-          placeholder="Search"
+          placeholder="Search item to add"
           onChange={findQuery}
         ></input>
         <BarcodeLogo className="barcode_image" />

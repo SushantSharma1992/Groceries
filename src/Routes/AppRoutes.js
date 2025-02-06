@@ -7,20 +7,30 @@ import Home from "../Pages/Home";
 import Products from "../Pages/Products";
 import Settings from "../Pages/Settings";
 import { routerPath } from "./Urls";
+import History from "../Pages/History";
+import Menu from "../Components/Header/Menu";
+import Header from "../Components/Header/Header";
+import { menuList } from "../Utils/Constants";
 
 export default function AppRoutes() {
+  const RoutesList = () => (
+    <Routes>
+      {/* <Route path="/" element={<AllItems />} /> */}
+      {/* <Route path={routerPath.home} element={<Home />} /> */}
+      <Route path={routerPath.products} element={<Products />} />
+      <Route path={routerPath.cart} element={<Cart />} />
+      <Route path={routerPath.settings} element={<Settings />} />
+      <Route path={routerPath.history} element={<History />} />
+      <Route path={routerPath.add} element={<AddItemFormPage />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+  );
+
   return (
     <BrowserRouter>
-      <Routes>
-        {/* <Route path="/" element={<AllItems />} /> */}
-        {/* <Route path={routerPath.home} element={<Home />} /> */}
-        <Route path={routerPath.products} element={<Products />} />
-        <Route path={routerPath.cart} element={<Cart />} />
-        <Route path={routerPath.settings} element={<Settings />} />
-        <Route path={routerPath.add} element={<AddItemFormPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <Home/>
+      <Header right={<Menu />}></Header>
+      <RoutesList />
+      <Home />
     </BrowserRouter>
   );
 }

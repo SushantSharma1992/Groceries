@@ -12,6 +12,10 @@ html {
   /* Internet Explorer/Edge */
   user-select: none;
 
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 body {
@@ -23,11 +27,22 @@ body {
   margin-inline: auto;
   text-align: center;
   color: black;
-  --primary-color-light: #8696FE;
-  --primary-color: #4942E4;
-  --secondary-color-light: #FFF5B8;
-  --secondary-color: #FFE7A0;
-  --add-z-index: 1000;
+  /* --primary-color-light: #8696fe;
+  --primary-color: #4942e4;
+  --secondary-color-light: #fff5b8;
+  --secondary-color: #ffe7a0; */
+  --primary-color-light: #75e6da;
+  --primary-color: #189ab4;
+  --secondary-color-light: #d4f1f4;
+  --secondary-color: #d4f1f4;
+  --dark: black;
+  --z-level1: 1;
+  --z-level2: 2;
+  --z-level3: 3;
+  --z-level4: 4;
+  --z-level5: 5;
+  --add-toplevel-plane: 1000;
+
   --button-radius: 4rem;
 }
 
@@ -41,9 +56,23 @@ body {
   justify-content: center;
 }
 
+.flex-end {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
 .direction_column {
   display: flex;
   flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .space_between {
@@ -54,6 +83,13 @@ button {
   background-color: var(--primary-color-light);
   flex: 1;
   color: #000 !important;
+  height: 100%;
+  min-width: 50px;
+}
+
+.button_container {
+  border-radius: 0.5em;
+  height: 100%;
 }
 
 .primary {
@@ -104,14 +140,15 @@ button {
   display: flex;
   background-color: #000;
   text-align: start;
-  color: #E4DCCF;
+  color: #e4dccf;
 }
 
 .itemContainer {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
+  color: #57c5b6;
+  padding: 4px;
   overflow: hidden;
-  color: #57C5B6;
 }
 
 .leftButton {
@@ -121,7 +158,7 @@ button {
   grid-row: 1/2;
   z-index: 1;
   background-color: var(--primary-color);
-  color: white
+  color: white;
 }
 
 .center_grid {
@@ -129,12 +166,12 @@ button {
   height: 100%;
   width: 100%;
   grid-column: 1/4;
-  z-index: 3;
+  z-index: var(--z-level2);
   grid-area: 1 / 1 / 2 / span 3;
 }
 
 .rightButton {
-  z-index: 2;
+  z-index: var(--z-level1);
   grid-column: 3/3;
   grid-row: 1/1;
   background-color: red;
@@ -144,13 +181,13 @@ button {
   text-align: right;
   height: 100%;
   width: 100%;
-  color: white
+  color: white;
 }
 
 .item-left {
-  padding: 1em;
   flex: 2;
   cursor: pointer;
+  padding-right: 8px;
   /* transition: background-color 1s linear */
 }
 
@@ -162,23 +199,29 @@ button {
   background-color: var(--primary-color-light);
 }
 
-
 .item-right {
   flex: 1;
   display: flex;
   overflow: hidden;
   cursor: pointer;
-  height: 100%;
+  min-width: 200px;
+}
+
+.title_container {
+  width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .product {
   font-size: 2em;
-  padding-right: .5em;
+  width: max-content;
+  scrollbar-width: 2px;
+  text-wrap: nowrap;
 }
 
 .price {
   font-size: 1.5rem;
-
 }
 
 .subtract {
@@ -222,10 +265,10 @@ button {
   right: 1rem;
   font-size: 40px;
   border-radius: 50%;
-  background-color: #57C5B6;
+  background-color: #57c5b6;
   text-align: center;
   border: none;
-  z-index: var(--add-z-index);
+  z-index: var(--add-toplevel-plane);
 }
 
 .addGroceries_button:active {
@@ -233,27 +276,28 @@ button {
 }
 
 .list_container {
-  padding: 0 .5rem 8rem .5rem;
+  padding: 0 0.5rem 8rem 0.5rem;
 }
 
 .add__item_container {
-  position: absolute;
+  position: fixed;
   display: flex;
   height: 100dvh;
   width: calc(100% - 8px);
   align-items: center;
   justify-content: center;
   background-color: black;
-  z-index: var(--add-z-index);
+  z-index: var(--add-toplevel-plane);
   backdrop-filter: blur(10px);
-  opacity: .9;
+  opacity: 0.9;
+  top: 0;
 }
 
 .add__Item {
   background-color: #000;
   border-radius: 1em;
   text-align: start;
-  color: #E4DCCF;
+  color: #e4dccf;
   width: 80dvw;
 }
 
@@ -261,7 +305,7 @@ button {
   display: flex;
   flex-direction: column;
   color: white;
-  padding: .5rem;
+  padding: 0.5rem;
   background-color: var(--primary-color);
   border-radius: 1em;
 }
@@ -271,12 +315,20 @@ button {
   flex-grow: 1;
   color: white;
   font-size: small;
-  padding: .5em;
+  padding: 0.5em;
   border-radius: 2em;
 }
 
-.form_input {
-  flex: 1
+.flex-1 {
+  flex: 1;
+}
+
+.small_width {
+  max-width: 100px;
+}
+
+.marginright-xl {
+  margin-right: 24px;
 }
 
 .button_margin_top {
@@ -300,7 +352,7 @@ button {
 }
 
 input {
-  border-radius: .5em;
+  border-radius: 0.5em;
   size: 1em;
   height: 28px;
   min-width: 0;
@@ -320,7 +372,7 @@ input {
 }
 
 select {
-  border-radius: .5em;
+  border-radius: 0.5em;
   size: 1em;
   height: 35px;
   font-size: 22px;
@@ -335,7 +387,6 @@ select {
   align-items: flex-end;
   background-color: var(--primary-color-light);
   color: #000;
-
 }
 
 .option_row {
@@ -344,6 +395,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  border-bottom: 1px solid black;
 }
 
 .option_description {
@@ -357,7 +409,8 @@ select {
   border-radius: 50%;
 }
 
-.option_image_container {}
+.option_image_container {
+}
 
 .option_image {
   height: 40px;
@@ -380,7 +433,6 @@ input[type="file"] {
   width: 100%;
 }
 
-
 .search_container {
   position: fixed;
   bottom: 4rem;
@@ -402,7 +454,7 @@ input[type="file"] {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 1rem;
   background-color: var(--primary-color-light);
 }
@@ -434,6 +486,67 @@ input[type="file"] {
   right: 0;
   color: white;
   padding: 1.5rem;
-  font-size: 1rem;
+  font-size: 2rem;
+}
 
+.grid_3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.font-xl {
+  font-size: 2em;
+}
+
+.sticky-top {
+  position: sticky;
+  z-index: var(--z-level3);
+  top: 0;
+  color: var(--primary-color-light);
+  font-weight: bold;
+}
+
+.primary_button {
+  font-size: 1.5em;
+  border-radius: 2em;
+  padding: 8px 16px;
+}
+
+.menu_container {
+  width: fit-content;
+  position: relative;
+  button {
+    all: unset;
+  }
+}
+
+.header_container {
+  color: var(--primary-color-light);
+  padding: 0 0.5rem;
+  max-height: 48px;
+  height: 48px;
+  font-weight: bold;
+  z-index: var(--z-level4);
+}
+
+.right_panel {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  background-color: var(--secondary-color);
+  z-index: var(--z-level4);
+  height: 100dvh;
+  width: 255px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.menubutton {
+  margin-left: auto;
+  width: fit-content;
+  padding: 4px;
+}
+
+.history_container{
+  background-color: black;
 }

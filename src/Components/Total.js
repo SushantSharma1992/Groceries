@@ -14,5 +14,5 @@ export default function Total(props) {
     setTotal(newTotal);
   }, [cartList]);
 
-  return <div className="item">Total : {total}</div>;
+  return <div className="item center font-xl sticky-top">Total : {total}</div>;
 }

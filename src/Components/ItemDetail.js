@@ -5,7 +5,6 @@ import RatesList from "./RatesList";
 export default function ItemDetail({ item, quantity }) {
   return (
     <div id={item.id} className="item-left">
-      <span className="product">{`${item.brand} ${item.name} ${item.weight} ${item.unit}`}</span>
       {quantity === undefined ? (
         <RatesList item={item} />
       ) : (

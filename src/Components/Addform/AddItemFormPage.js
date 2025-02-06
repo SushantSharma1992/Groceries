@@ -1,40 +1,77 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ItemContext } from "../../Context/ItemsProvider";
-import { metricChartArray } from "../../Utils/Constants";
+import { initObject, metricChartArray } from "../../Utils/Constants";
 import BarCodeScanner from "../BarCodeScanner";
 import AddQuantityRow from "./AddQuantityRow";
 import { ReactComponent as BarcodeLogo } from "../../assets/barcode.svg";
 import FormRow from "./FormRow";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function AddItemFormPage(props) {
-  const { item, setShow } = props;
-  const { items, setItems } = useContext(ItemContext);
-  const ratesList = item.rates.map((value, index) => {
-    return <AddQuantityRow key={index} value={value} />;
-  });
-  const [quantityArray, setQuantityArray] = useState(ratesList);
+  const { product, setShow } = props;
+  const [item, setItem] = useState(product);
+  const { items, setItems, setCartList } = useContext(ItemContext);
+
+  const [quantityArray, setQuantityArray] = useState([]);
   const [barcode, setBarcode] = useState(item.barcode);
   const dialogRef = useRef();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const deleteQuantityRow = (index) => {
+    setQuantityArray((prev) => {
+      const copy = [...prev];
+      copy.splice(index, 1);
+      return copy;
+    });
+  };
+
+  useEffect(() => {
+    const ratesList = item.rates.map((value, index) => {
+      return (
+        <AddQuantityRow
+          key={index}
+          index={index}
+          value={value}
+          onClickRemove={deleteQuantityRow}
+        />
+      );
+    });
+    setQuantityArray(ratesList);
+  }, [item]);
+
+  const updateInProducts = (newItem) => {
+    setItems((prevState) => {
+      const newArray = Array.of(...prevState);
+      const index = newArray.findIndex((value) => value.id === newItem.id);
+      if (index > 0) {
+        newArray[index] = newItem;
+      }
+      return newArray;
+    });
+  };
+  const updateInCart = (newItem) => {
+    setCartList((prevState) => {
+      const newArray = Array.of(...prevState);
+      const index = newArray.findIndex((value) => value.id === newItem.id);
+      if (index > 0) {
+        console.log({ newItem });
+        console.log(newArray[index]);
+        newArray[index] = { ...newArray[index], ...newItem };
+      }
+      return newArray;
+    });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     let newItem;
-    if (e.target[0].value) {
-      const target = e.target;
+    if (e.target[1].value) {
       const data = getObject(e.target);
-      resetValues(target);
+      console.log({ data });
       if (item.id) {
         newItem = { ...item, ...data, updateOn: new Date() };
-        setItems((prevState) => {
-          const newArray = Array.of(...prevState);
-          const index = newArray.findIndex((value) => value.id === newItem.id);
-          if (index > 0) {
-            newArray[index] = newItem;
-          }
-          return newArray;
-        });
-        setShow(false);
+        updateInProducts(newItem);
+        updateInCart(newItem);
       } else {
         newItem = {
           id: items.length + 1,
@@ -46,6 +83,7 @@ export default function AddItemFormPage(props) {
         setItems((prevState) => [...prevState, newItem]);
       }
     }
+    //resetValues();
   };
 
   const onChangeBarcode = (e) => {
@@ -66,7 +104,7 @@ export default function AddItemFormPage(props) {
     const rates = [];
     let quantity = "";
     for (let index = 0; index < target.length; index++) {
-      if (target[index].type !== "button") {
+      if (target[index].type !== "button" && target[index].type !== "submit") {
         console.log(target[index].type);
         if (target[index].name === "quantity") {
           quantity = [target[index].value];
@@ -83,12 +121,14 @@ export default function AddItemFormPage(props) {
     return Object.assign(...element);
   };
 
-  const resetValues = (target) => {
-    for (let i = 0; i < target.length; i++) {
-      if (target[i].type !== "button") {
-        target[i].value = "";
-      }
-    }
+  const resetValues = () => {
+    console.log("resetting");
+    setItem(initObject);
+    // for (let i = 0; i < target.length; i++) {
+    //   if (target[i].type !== "button") {
+    //     target[i].value = "";
+    //   }
+    // }
   };
 
   return (
@@ -96,31 +136,21 @@ export default function AddItemFormPage(props) {
       <div
         className="closeButton"
         onClick={() => {
+          resetValues();
           setShow(false);
         }}
       >
-        X
+        <IoCloseCircleOutline />
       </div>
       <div className="add__Item">
         <form onSubmit={onSubmit}>
           <div className="form_items">
             <FormRow
-              label={"Brand:"}
-              input={
-                <input
-                  className="form_input"
-                  type="text"
-                  name="brand"
-                  defaultValue={item.brand}
-                ></input>
-              }
-            />
-            <FormRow
               label={"Barcode"}
               input={
                 <>
                   <input
-                    className="form_input"
+                    className="flex-1 marginright-xl"
                     type="text"
                     name="barcode"
                     onChange={onChangeBarcode}
@@ -136,10 +166,21 @@ export default function AddItemFormPage(props) {
               }
             />
             <FormRow
+              label={"Brand:"}
+              input={
+                <input
+                  className="flex-1"
+                  type="text"
+                  name="brand"
+                  defaultValue={item.brand}
+                ></input>
+              }
+            />
+            <FormRow
               label={"Name:"}
               input={
                 <input
-                  className="form_input"
+                  className="flex-1"
                   type="text"
                   name="name"
                   defaultValue={item.name}
@@ -151,7 +192,7 @@ export default function AddItemFormPage(props) {
               input={
                 <>
                   <input
-                    className="form_input"
+                    className="flex-1 marginright-xl"
                     type="number"
                     name="weight"
                     defaultValue={item.weight}
@@ -180,8 +221,10 @@ export default function AddItemFormPage(props) {
                   return [
                     ...prevState,
                     <AddQuantityRow
-                      key={quantityArray.length + 1}
-                      value={{ quantity: "", price: "" }}
+                      key={quantityArray.length}
+                      index={quantityArray.length}
+                      value={{ quantity: 3 * quantityArray.length, price: "" }}
+                      onClickRemove={deleteQuantityRow}
                     />,
                   ];
                 });

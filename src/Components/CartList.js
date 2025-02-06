@@ -5,6 +5,8 @@ import { initObject } from "../Utils/Constants";
 import AddItemFormPage from "./Addform/AddItemFormPage";
 import CartSearch from "./CartSearch";
 import Total from "./Total";
+import AddToHistory from "./AddToHistory";
+import ClearCart from "./CartComponents/ClearCart";
 
 export default function CartList() {
   const [show, setShow] = useState(false);
@@ -18,7 +20,8 @@ export default function CartList() {
 
   return (
     <div className="list_container">
-      {show && <AddItemFormPage item={editItem} setShow={setShow} />}
+      {show && <AddItemFormPage product={editItem} setShow={setShow} />}
+      <Total />
       {cartList.map((value) => {
         return (
           <div key={value.id}>
@@ -26,7 +29,6 @@ export default function CartList() {
           </div>
         );
       })}
-      <Total />
       <CartSearch />
     </div>
   );

@@ -1,8 +1,10 @@
-import React from 'react'
-import Options from './Options'
+import React from "react";
+import Options from "./Options";
 
 export default function Settings() {
   return (
-    <Options/>
-  )
+    <div className="list_container">
+      <Options />
+    </div>
+  );
 }

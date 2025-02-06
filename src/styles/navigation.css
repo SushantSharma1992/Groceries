@@ -35,11 +35,19 @@
     background-color: var(--secondary-color-light);
     margin: 1px;
     border: 1px solid var(--primary-color);
-    font-size: .5rem;
+    font-size: 1rem;
     border-radius: 1rem;
     text-decoration: none;
     color: black;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.navItem > svg{
+    padding-right: 8px;
 }
 
 .navItem:active {

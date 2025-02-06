@@ -5,11 +5,8 @@ export default function Rates({ item, quantity }) {
   return (
     <div className="center space_between">
       <span>
-        <div>{`MRP: ${getPrice(item, quantity)}`}</div>
+        <div>{`Price   : ${getPrice(item, quantity)}`}</div>
         <div>Quantity: {quantity}</div>
-      </span>
-      <span>
-        Price:
         <span className="price">Rs. {getPrice(item, quantity) * quantity}</span>
       </span>
     </div>

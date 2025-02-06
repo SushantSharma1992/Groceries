@@ -5,15 +5,13 @@ import Button from "../Button";
 const ClearCart = () => {
   const { setCartList } = useContext(ItemContext);
   return (
-    <div className="navItem">
-      <Button
-        onClick={() => {
-          setCartList([]);
-        }}
-      >
-        Clear
-      </Button>
-    </div>
+    <Button
+      onClick={() => {
+        setCartList([]);
+      }}
+    >
+      Clear
+    </Button>
   );
 };
 

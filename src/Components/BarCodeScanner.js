@@ -23,7 +23,8 @@ export default function BarCodeScanner({ updateBarcode, closeDialog }) {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    reader.current
+    const readerRef = reader.current;
+    readerRef
       .decodeFromConstraints(
         {
           audio: false,
@@ -53,7 +54,7 @@ export default function BarCodeScanner({ updateBarcode, closeDialog }) {
         console.error({ error });
       });
     return () => {
-      reader.current.reset();
+      readerRef.reset();
     };
   }, [videoRef]);
 
@@ -62,23 +63,26 @@ export default function BarCodeScanner({ updateBarcode, closeDialog }) {
   }, [flashOn]);
 
   const flashOnFunc = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: {
-          facingMode: "environment",
-        },
-      })
-      .then((stream) => {
-        const track = stream.getVideoTracks()[0];
+    if ("mediaDevices" in navigator) {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: {
+            facingMode: "environment",
+          },
+        })
+        .then((stream) => {
+          const track = stream.getVideoTracks()[0];
 
-        if (!track.getCapabilities().torch) {
-          alert("No torch available.");
-        }
-        track.applyConstraints({ advanced: [{ torch: flashOn }] });
-      })
-      .catch((error) => {
-        setCameraError(error);
-      });
+          if (!track.getCapabilities().torch) {
+            alert("No torch available.");
+          }
+          track.applyConstraints({ advanced: [{ torch: flashOn }] });
+        })
+        .catch((error) => {
+          setCameraError(error);
+        });
+    } else {
+    }
   };
 
   return cameraError ? (

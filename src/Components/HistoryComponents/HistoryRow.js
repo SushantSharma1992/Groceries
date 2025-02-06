@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../../Context/ItemsProvider";
-import Button from "../Button";
-import { Link, useNavigate } from "react-router-dom";
 import { routerPath } from "../../Routes/Urls";
 import { deleteFromArray } from "../../Utils/Utils";
+import Button from "../Button";
 
 const HistoryRow = ({ item }) => {
   const navigate = useNavigate();
@@ -20,22 +20,28 @@ const HistoryRow = ({ item }) => {
   return (
     <div key={item.name} className="flex-row">
       <div
+        className="margin-auto"
         onClick={() => {
-          console.log({ item });
           loadIntoCart(item.snapshot);
           redirectToCart();
         }}
       >
         {item.name}
       </div>
-      <Button
-        onClick={() => {
-          const newList = deleteFromArray(Array.of(...savedHistory), "cartId", item.cartId);
-          setSavedHistory(newList);
-        }}
-      >
-        <MdDeleteOutline />
-      </Button>
+      <div className="delete_button">
+        <Button
+          onClick={() => {
+            const newList = deleteFromArray(
+              Array.of(...savedHistory),
+              "cartId",
+              item.cartId
+            );
+            setSavedHistory(newList);
+          }}
+        >
+          <MdDeleteOutline />
+        </Button>
+      </div>
     </div>
   );
 };

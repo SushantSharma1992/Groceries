@@ -54,12 +54,14 @@ export default function AddItemFormPage(props) {
       const newArray = Array.of(...prevState);
       const index = newArray.findIndex((value) => value.id === newItem.id);
       if (index > 0) {
-        console.log({ newItem });
-        console.log(newArray[index]);
         newArray[index] = { ...newArray[index], ...newItem };
       }
       return newArray;
     });
+  };
+
+  const resetValues = () => {
+    setItem(initObject);
   };
 
   const onSubmit = (e) => {
@@ -67,14 +69,13 @@ export default function AddItemFormPage(props) {
     let newItem;
     if (e.target[1].value) {
       const data = getObject(e.target);
-      console.log({ data });
       if (item.id) {
         newItem = { ...item, ...data, updateOn: new Date() };
         updateInProducts(newItem);
         updateInCart(newItem);
       } else {
         newItem = {
-          id: items.length + 1,
+          id: items[items.length - 1].id + 1,
           purchaseQuantity: 0,
           createdOn: new Date(),
           updateOn: new Date(),
@@ -83,7 +84,8 @@ export default function AddItemFormPage(props) {
         setItems((prevState) => [...prevState, newItem]);
       }
     }
-    //resetValues();
+    setItem(newItem);
+    resetValues();
   };
 
   const onChangeBarcode = (e) => {
@@ -105,7 +107,6 @@ export default function AddItemFormPage(props) {
     let quantity = "";
     for (let index = 0; index < target.length; index++) {
       if (target[index].type !== "button" && target[index].type !== "submit") {
-        console.log(target[index].type);
         if (target[index].name === "quantity") {
           quantity = [target[index].value];
         } else if (target[index].name === "price") {
@@ -119,16 +120,6 @@ export default function AddItemFormPage(props) {
     }
     element.push({ rates });
     return Object.assign(...element);
-  };
-
-  const resetValues = () => {
-    console.log("resetting");
-    setItem(initObject);
-    // for (let i = 0; i < target.length; i++) {
-    //   if (target[i].type !== "button") {
-    //     target[i].value = "";
-    //   }
-    // }
   };
 
   return (

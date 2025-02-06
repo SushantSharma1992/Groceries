@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import React, { useState } from "react";
-import { ReactComponent as BarcodeLogo } from "../assets/barcode.svg";
+import BarCodeDialog from "./BarCodeDialog";
 import SearchResults from "./SearchResults";
 
 export default function Search({ list, actionOnResult }) {
@@ -27,7 +27,14 @@ export default function Search({ list, actionOnResult }) {
           placeholder="Search item to add"
           onChange={findQuery}
         ></input>
-        <BarcodeLogo className="barcode_image" />
+        <div className="paddingright-md">
+          <BarCodeDialog
+            setBarcode={(value) => {
+              const event = { target: { value: value } };
+              findQuery(event);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

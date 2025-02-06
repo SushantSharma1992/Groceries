@@ -5,8 +5,6 @@ import { initObject } from "../Utils/Constants";
 import AddItemFormPage from "./Addform/AddItemFormPage";
 import CartSearch from "./CartSearch";
 import Total from "./Total";
-import AddToHistory from "./AddToHistory";
-import ClearCart from "./CartComponents/ClearCart";
 
 export default function CartList() {
   const [show, setShow] = useState(false);

@@ -1,6 +1,3 @@
-import AddToHistory from "../Components/AddToHistory";
-import ClearCart from "../Components/CartComponents/ClearCart";
-import Settings from "../Pages/Settings";
 
 export const SavedData = {
   GROCERIES: "groceries",
@@ -131,31 +128,4 @@ export const metricChartArray = [
 ];
 
 export const metricChart = new Map(metricChartArray);
-
-export const menuList = [
-  {
-    name: "Add to history",
-    value: "Add",
-    onClick: () => {
-      console.log("add to history ItemClicked");
-    },
-    component: <AddToHistory/>
-  },
-  {
-    name: "Clear Cart",
-    value: "Clear",
-    onClick: () => {
-      console.log("Clear ItemClicked");
-    },
-    component: <ClearCart/>
-  },
-  {
-    name: "Settings",
-    value: "Settings",
-    onClick: () => {
-      console.log("Setttings ItemClicked");
-    },
-    component:<Settings/>
-  },
-];
 
